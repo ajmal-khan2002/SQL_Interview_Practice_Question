@@ -263,6 +263,10 @@ CREATE INDEX Id_order_items_order on order_items(order_id);
 CREATE INDEX Id_product_category on product(category_id);
 CREATE INDEX Id_reviews_product on reviews(product_id);
 
+
+SQL Interview Practice Questions
+🟢 Basic Level (1–15)
+
 -- 1. Retrieve the full name, email, and city of all customers who signed up after January 1, 2022. 
 SELECT FIRST_NAME, LAST_NAME, EMAIL, CITY
 FROM CUSTOMERS
@@ -294,6 +298,57 @@ COUNT(ORDER_ID) AS TOTAL_ORDER_COUNT
 FROM ORDERS
 WHERE YEAR(ORDER_DATE) = '2023'
 GROUP BY YEAR(ORDER_DATE), MONTH(ORDER_DATE);
+
+
+-- 7. Find the total number of customers per country.
+SELECT * FROM CUSTOMERS;
+SELECT CITY, COUNT(CUSTOMER_ID) AS CUSTOMER_COUNT_PER_CITY
+FROM CUSTOMERS
+GROUP BY CITY
+ORDER BY CITY;
+
+-- 8. List all products in the 'Books' category.
+SELECT P.NAME,C.CATEGORY_ID,C.NAME
+FROM PRODUCTS P 
+INNER JOIN CATEGORIES C 
+ON P.CATEGORY_ID = C.CATEGORY_ID
+WHERE C.NAME = 'BOOKS';
+
+-- 9. Show all orders where no coupon was used (coupon_id is NULL).
+SELECT * FROM ORDERS
+WHERE COUPON_ID IS NULL;
+ 
+-- 10. Find the most expensive product in the entire catalog.
+SELECT NAME , COST_PRICE
+FROM (SELECT NAME , COST_PRICE,DENSE_RANK()OVER(ORDER BY COST_PRICE DESC ) AS MOST_EXPENSIVE_PRO
+FROM PRODUCTS
+)AS E
+WHERE  MOST_EXPENSIVE_PRO = 1;
+
+-- 11. How many products belong to each category? Include the category name.
+
+SELECT C.NAME,COUNT(P.PRODUCT_ID) AS PRODUCT_COUNT
+FROM PRODUCTS P 
+INNER JOIN CATEGORIES C 
+ON P.CATEGORY_ID = C.CATEGORY_ID
+GROUP BY C.NAME;
+
+-- 12. List all customers whose email contains the domain 'gmail.com'.
+SELECT * FROM CUSTOMERS
+WHERE EMAIL LIKE '%gmail.com';
+
+-- 13. What is the total revenue generated from all 'delivered' orders?
+SELECT SUM(TOTAL_AMOUNT) AS TOTAL_REVENUE_DEL
+FROM ORDERS
+WHERE STATUS = 'DELIVERED';
+
+-- 14. Show all orders placed in the month of October 2023.
+SELECT * FROM ORDERS
+WHERE YEAR(ORDER_DATE) = 2023 AND MONTH(ORDER_DATE) = 10;
+
+-- 15. Find all products where the product name contains the word 'Book'.
+SELECT * FROM PRODUCTS
+WHERE NAME LIKE '%BOOK%';
 								
 
 
