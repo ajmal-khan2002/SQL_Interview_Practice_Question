@@ -352,7 +352,34 @@ WHERE NAME LIKE '%BOOK%';
 								
 
 
+-- 🟡 Intermediate Level (16–35)
 
+-- 16. List each customer along with the total number of orders they have placed. Include customers with zero orders. 
+SELECT * FROM CUSTOMERS;
+SELECT * FROM ORDERS;
+SELECT C.CUSTOMER_ID,C.FIRST_NAME,COUNT(O.ORDER_ID) AS TOTAL_NUM_ORDER
+FROM CUSTOMERS C 
+LEFT JOIN ORDERS O 
+ON O.CUSTOMER_ID =  C.CUSTOMER_ID
+GROUP BY C.CUSTOMER_ID,C.FIRST_NAME
+
+-- 17. Find the top 5 best-selling products by total quantity sold.
+SELECT P.PRODUCT_ID,P.NAME,SUM(OI.QUANTITY)AS TOTAL_QTY_SOLVE
+FROM PRODUCTS P 
+INNER JOIN ORDER_ITEMS OI 
+ON P.PRODUCT_ID = OI.PRODUCT_ID
+INNER JOIN ORDERS O 
+ON O.ORDER_ID = OI.ORDER_ID
+GROUP BY P.PRODUCT_ID,P.NAME
+ORDER BY TOTAL_QTY_SOLVE DESC
+LIMIT 5;
+
+-- 18. Show all orders along with the customer's full name, order date, and total amount — sorted by total amount descending.
+SELECT C.CUSTOMER_ID,C.FIRST_NAME,C.LAST_NAME,O.ORDER_DATE,O.TOTAL_AMOUNT
+FROM CUSTOMERS C 
+INNER JOIN ORDERS O 
+ON C.CUSTOMER_ID = O.CUSTOMER_ID
+ORDER BY TOTAL_AMOUNT DESC;
 
  
 
