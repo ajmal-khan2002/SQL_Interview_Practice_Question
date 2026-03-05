@@ -353,18 +353,6 @@ WHERE NAME LIKE '%BOOK%';
 
 
 -- 🟡 Intermediate Level (16–35)
-<<<<<<< HEAD
-=======
-
--- 16. List each customer along with the total number of orders they have placed. Include customers with zero orders. 
-SELECT * FROM CUSTOMERS;
-SELECT * FROM ORDERS;
-SELECT C.CUSTOMER_ID,C.FIRST_NAME,COUNT(O.ORDER_ID) AS TOTAL_NUM_ORDER
-FROM CUSTOMERS C 
-LEFT JOIN ORDERS O 
-ON O.CUSTOMER_ID =  C.CUSTOMER_ID
-GROUP BY C.CUSTOMER_ID,C.FIRST_NAME;
->>>>>>> 9ebe9ae174e75c50077fdbc1729071d1ccc190ae
 
 -- 16. List each customer along with the total number of orders they have placed. Include customers with zero orders. 
 SELECT * FROM CUSTOMERS;
@@ -394,9 +382,6 @@ ON C.CUSTOMER_ID = O.CUSTOMER_ID
 ORDER BY TOTAL_AMOUNT DESC;
 
  
-
-
-
 
 
 
